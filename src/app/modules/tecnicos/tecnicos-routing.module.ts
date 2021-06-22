@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TecnicosModule } from './tecnicos.module';
 import { TecnicosComponent} from './tecnicos.component';
+import { GestionTecnicosComponent } from './pages/gestion-tecnicos/gestion-tecnicos.component';
 
 const routes: Routes = [
-  {
-    path:'',component:TecnicosComponent,
+  {path:'',component:GestionTecnicosComponent}
+    //{path:'',component:TecnicosComponent,}
     
-  }
+  
 ];
 
 @NgModule({

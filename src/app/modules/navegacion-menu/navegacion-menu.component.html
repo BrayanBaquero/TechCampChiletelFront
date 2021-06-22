@@ -3,12 +3,40 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+      
+    <mat-toolbar>
+      <mat-icon color="accent" style=" transform: scale(3);padding: 1.5rem;">account_circle</mat-icon>
+      <br>
+      {{nombreUsuario}}
+    </mat-toolbar>
+    <mat-divider></mat-divider>
     <mat-nav-list>
-      <a mat-list-item routerLink="configuracion/daño" routerLinkActive=true>Tecnicos</a>
-      <a mat-list-item routerLink="configuracion/daño" routerLinkActive=true>Daño</a>
-      <a mat-list-item routerLink="configuracion/daño" routerLinkActive=true>Agenda</a>
-      <a mat-list-item routerLink="configuracion/" routerLinkActive=true>Configuracion</a>
+
+      <a mat-list-item routerLink="tecnicos" routerLinkActive="active">
+        <mat-icon color="accent">build</mat-icon>
+        Técnicos
+      </a>
+      <a mat-list-item routerLink="configuracion/daño" routerLinkActive=true>
+       <mat-icon color="accent">group</mat-icon>
+       Cuadrillas
+      </a>
+      <a mat-list-item routerLink="configuracion/daño" routerLinkActive=true>
+        <mat-icon color="accent">error</mat-icon>
+        Daño
+      </a>
+      <a mat-list-item routerLink="configuracion/" routerLinkActive=true>
+        <mat-icon color="accent">assignment_turned_in</mat-icon>
+        Ordenes de atención
+      </a>
+      <a mat-list-item routerLink="configuracion/daño" routerLinkActive=true>
+        <mat-icon color="accent">calendar_today</mat-icon>
+        Agenda
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="configuracion/" routerLinkActive=true>
+        <mat-icon color="accent">settings</mat-icon>
+        Configuracion
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,7 +49,11 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>TallerFront</span>
+      <span>Chiletel</span>
+      
+      <button mat-icon-button matSuffix (click)="logOut()" class="logout">
+        <mat-icon color="accent" >logout</mat-icon>
+      </button>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

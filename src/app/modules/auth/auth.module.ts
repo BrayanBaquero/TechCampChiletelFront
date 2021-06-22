@@ -8,6 +8,8 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './service/auth.service';
 
 
 
@@ -22,8 +24,11 @@ import { LoginComponent } from './pages/login/login.component';
     CommonModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
-  exports:[RegisterComponent]
+  exports:[RegisterComponent],
+  providers: [AuthService],
+
 })
 export class AuthModule { }

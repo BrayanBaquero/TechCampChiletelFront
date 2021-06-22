@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { NavegacionMenuRoutingModule } from './navegacion-menu-routing.module';
 import { NavegacionMenuComponent } from './navegacion-menu.component';
+import { TokenService } from 'src/app/shared/services/token.service';
 ;
 
 
@@ -15,4 +16,8 @@ import { NavegacionMenuComponent } from './navegacion-menu.component';
 
   ]
 })
-export class NavegacionMenuModule { }
+export class NavegacionMenuModule {
+
+  
+
+}

@@ -1,0 +1,80 @@
+
+<h1 class="row" mat-dialog-title>{{data.titulo}}</h1>
+<div >
+    <form [formGroup]="TecnicosForm"  >
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese nombre</mat-label>
+                <input matInput placeholder="" formControlName="nombre" required>
+                <mat-error *ngIf="TecnicosForm.controls['nombre'].hasError">{{mssgError('nombre')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese el apellido</mat-label>
+                <input matInput placeholder="" formControlName="apellido" required>
+                <mat-error *ngIf="TecnicosForm.controls['apellido'].hasError">{{mssgError('apellido')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese el numero de identificación</mat-label>
+                <input matInput placeholder="" formControlName="numeroIden">
+                <mat-error *ngIf="TecnicosForm.controls['numeroIden'].hasError">{{mssgError('numeroIden')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese el email</mat-label>
+                <input matInput placeholder="" formControlName="email" required>
+                <mat-error *ngIf="TecnicosForm.controls['email'].hasError">{{mssgError('email')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese el numero de telefono</mat-label>
+                <input matInput placeholder="" formControlName="telefono" required>
+                <mat-error *ngIf="TecnicosForm.controls['telefono'].hasError">{{mssgError('telefono')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese la dirección</mat-label>
+                <input matInput placeholder="" formControlName="direccion" required>
+                <mat-error *ngIf="TecnicosForm.controls['direccion'].hasError">{{mssgError('direccion')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese la cuadrilla</mat-label>
+                <input matInput placeholder="" formControlName="cuadrilla" required>
+                <mat-error *ngIf="TecnicosForm.controls['cuadrilla'].invalid">error</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Tipos de daño</mat-label>
+                <mat-select formControlName="tdano" multiple>
+                    <mat-select-trigger>
+                        {{TecnicosForm.get('tdano').value? TecnicosForm.get('tdano').value[0] : ''}}
+                        <span *ngIf="TecnicosForm.get('tdano').value.length > 1" class="example-additional-selection">
+                        (+{{TecnicosForm.get('tdano').value.length - 1}} {{TecnicosForm.get('tdano').value.length === 2 ? 'otro' : 'otros'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let dano of danosList" [value]="dano">{{dano}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="TecnicosForm.controls['tdano'].hasError">{{mssgError('tdano')}}</mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div class="row" mat-dialog-actions>
+            <button class=button mat-raised-button color="primary" (click)="cerrar()">Cancelar</button>
+            <button class=button mat-raised-button color="primary" type="submit" 
+                
+                (click)="enviar()"
+                cdkFocusInitial
+                [disabled]="TecnicosForm.invalid">{{data.titulo=='AGREGAR'?'Guardar':'Actualizar'}}</button>
+        </div>
+        
+    </form>
+</div>

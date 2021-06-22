@@ -2,34 +2,38 @@
 <mat-card class="formCard">
     <mat-card-header>
         <mat-card-title>LOGIN</mat-card-title>
-        <mat-icon class="icon" style="width: 20px;height: 20px;">person_pin</mat-icon>
+        
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="submit()">
-            
+        
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" >
             <div class="row">
-                <mat-icon class="icon">email</mat-icon>
+                <mat-icon class="icon" style=" transform: scale(3);padding: 1.5rem;">person_pin</mat-icon>
+            </div> 
+            <div class="row">
                 <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Enter your email</mat-label>
-                    <input matInput placeholder="pat@example.com" formControlName="email" required>
-                    <mat-error *ngIf="loginForm.controls['email'].invalid"></mat-error>
+                    <mat-label>Ingrese el usuario</mat-label>
+                    <input matInput placeholder="user123" formControlName="username" required>
+                    <mat-error *ngIf="loginForm.controls['username'].invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-icon class="icon">lock</mat-icon>
                 <mat-form-field class="full-width" appearance="fill">
-                    <mat-label>Enter your password</mat-label>
+                    <mat-label>Ingrese la contraseña</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-error *ngIf="loginForm.controls['email'].invalid"></mat-error>
+                    <mat-error *ngIf="loginForm.controls['password'].invalid"></mat-error>
                   </mat-form-field>
+            </div>
+            <div class="row">
+                <button mat-raised-button color="primary" type="submit" class=button>Ingresar</button>
             </div>
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Ingresar</button>
+        
       </mat-card-actions>
 </mat-card>
 
