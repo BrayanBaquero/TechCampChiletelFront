@@ -9,8 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { TecnicoService } from './services/tecnico.service';
 import { interceptorProvider } from 'src/app/shared/interceptors/prod-interceptor.service';
 import { MaterialModule } from 'src/app/shared/material/material.module';
-import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { TecnicoFormComponent } from './components/tecnico-form/tecnico-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CuadrillaService } from './services/cuadrilla.service';
+import { CuadrillaFormComponent } from './components/cuadrilla-form/cuadrilla-form.component';
 
 
 
@@ -19,7 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TecnicosComponent, 
     GestionTecnicosComponent, 
     GestionCuadrillasComponent, 
-    TabMenuComponent, ModalDialogComponent],
+    TabMenuComponent, 
+    TecnicoFormComponent, 
+    CuadrillaFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -28,6 +32,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [TecnicoService,interceptorProvider],
+  providers:[
+    TecnicoService,
+    CuadrillaService,
+    interceptorProvider
+  ],
 })
 export class TecnicosModule { }

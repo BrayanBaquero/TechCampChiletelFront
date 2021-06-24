@@ -1,0 +1,38 @@
+<h1 class="row" mat-dialog-title>{{data.titulo}}</h1>
+<div >
+    <form [formGroup]="CuadrillaForm"  >
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Ingrese nombre</mat-label>
+                <input matInput placeholder="" formControlName="nombre" required>
+                <mat-error *ngIf="CuadrillaForm.controls['nombre'].hasError">{{mssgError('nombre')}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Zonas</mat-label>
+                <mat-select formControlName="zona" multiple>
+                    <mat-select-trigger>
+                        {{CuadrillaForm.get('zona').value? CuadrillaForm.get('zona').value[0] : ''}}
+                        <span *ngIf="CuadrillaForm.get('zona').value.length > 1" class="example-additional-selection">
+                        (+{{CuadrillaForm.get('zona').value.length - 1}} {{CuadrillaForm.get('zona').value.length === 2 ? 'otro' : 'otros'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let zona of zonasList" [value]="zona">{{zona}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="CuadrillaForm.controls['zona'].hasError">{{mssgError('zona')}}</mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div class="row" mat-dialog-actions>
+            <button class=button mat-raised-button color="primary" (click)="cerrar()">Cancelar</button>
+            <button class=button mat-raised-button color="primary" type="submit" 
+                
+                (click)="enviar()"
+                cdkFocusInitial
+                [disabled]="CuadrillaForm.invalid">{{data.titulo=='AGREGAR'?'Guardar':'Actualizar'}}</button>
+        </div>
+        
+    </form>
+</div>

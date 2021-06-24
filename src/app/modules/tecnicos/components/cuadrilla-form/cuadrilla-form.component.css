@@ -1,0 +1,23 @@
+.formCard{
+    margin: 5rem auto;
+    width: 30%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+  }
+
+  .full-width{
+      width: 100%;
+  }
+
+  .icon{
+      color:gray;
+  }
+
+  .mat-card-header{
+      justify-content: center;
+  }

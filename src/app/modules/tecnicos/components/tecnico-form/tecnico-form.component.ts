@@ -6,16 +6,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TecnicoService } from '../../services/tecnico.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CuadrillaService } from '../../services/cuadrilla.service';
 
 @Component({
-  selector: 'app-modal-dialog',
-  templateUrl: './modal-dialog.component.html',
-  styleUrls: ['./modal-dialog.component.css']
+  selector: 'app-tecnico-form',
+  templateUrl: './tecnico-form.component.html',
+  styleUrls: ['./tecnico-form.component.css']
 })
-export class ModalDialogComponent implements OnInit{
-
+export class TecnicoFormComponent implements OnInit{
+  tecnico:Tecnico;
+  danosList: string[] = ['total', 'parcial', 'esporadica'];
+  nombresCuadrillas:string[];
   //Definicion de campos de formulario para CRUD
-  
   TecnicosForm=this.fb.group(
     {
       nombre:     [null,[Validators.required,Validators.maxLength(10)]],
@@ -28,8 +30,7 @@ export class ModalDialogComponent implements OnInit{
       tdano :     [[],Validators.required],
     },
   );
-  tecnico:Tecnico;
-  danosList: string[] = ['total', 'parcial', 'esporadica'];
+  
 
 
   constructor(
@@ -37,9 +38,12 @@ export class ModalDialogComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data:any,
     private fb: FormBuilder,
     private tecnicoService:TecnicoService,
+    private cuadrillaService: CuadrillaService,
     private notificacion:MatSnackBar) {}
 
     ngOnInit(){
+      this.cuadrillas();//Obtener la lista de nombres de las cuadrillas
+
       if(this.data.tecnico!=null){
         this.tecnico=this.data.tecnico;
         this.TecnicosForm.controls['nombre'].setValue(this.tecnico.nombre);
@@ -59,9 +63,20 @@ export class ModalDialogComponent implements OnInit{
       }
 
     }
+
+    cuadrillas():void{
+      this.cuadrillaService.listaNombresCuadrillas().subscribe(
+        data=>{
+          this.nombresCuadrillas=data;
+        },
+        err=>{
+
+        }
+      )
+    }
+
     cerrar(): void {
       this.dialogRef.close();
-      
     }
     
     /*Verificar si va agregar un nuevo usuario o se van a actualizar los datos de 
@@ -85,7 +100,7 @@ export class ModalDialogComponent implements OnInit{
         },
         err=>{
           console.log(err.error.errorMessage);
-          this.notificacion.open(err.error.errorMessage,"Cerrar");
+          this.notificacion.open(err.error.message,"Cerrar");
 
         }
       )
@@ -94,6 +109,7 @@ export class ModalDialogComponent implements OnInit{
       this.tecnicoService.actualizarTecnico(this.tecnico,this.tecnico.numeroIden).subscribe(
         msg=>{
           console.log(msg)
+          this.dialogRef.close();
         },
         err=>{
           console.log(err)
@@ -114,12 +130,7 @@ export class ModalDialogComponent implements OnInit{
       if(control.getError('pattern')){
         error="Solo puede ingresar valores numericos";
       }
-
-      //error=JSON.stringify(control.getError('email'));
-      
-
     }
-    //console.log(this.TecnicosForm.controls['email'].hasError('email'))
     return error;
   }
 }

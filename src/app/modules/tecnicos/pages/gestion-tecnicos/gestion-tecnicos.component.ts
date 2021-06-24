@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
+import { TecnicoFormComponent } from '../../components/tecnico-form/tecnico-form.component';
 import { Tecnico } from '../../model/tecnico';
 import { TecnicoService } from '../../services/tecnico.service';
 import { TecnicosModule } from '../../tecnicos.module';
@@ -44,17 +44,7 @@ export class GestionTecnicosComponent implements OnInit {
     this.dataSource=this.tecnicos;
   }
 
-  //Funcion para agregar tecnico
-  agregarTecnico(){
-    this.tecnicoService.agregarTecnico(this.tecnico).subscribe(
-      res=>{
-        console.log(res);
-      },
-      err=>{
-        console.log(err);
-      }
-    );
-  }
+
 
   borrarTecnico(identificacion:number):void{
     this.tecnicoService.borrarTecnico(identificacion).subscribe(
@@ -87,7 +77,7 @@ export class GestionTecnicosComponent implements OnInit {
       }
     }
 
-    const dialogRef = this.dialog.open(ModalDialogComponent, {
+    const dialogRef = this.dialog.open(TecnicoFormComponent, {
       width: '350px',
       data:this.datosForm,
       disableClose: true

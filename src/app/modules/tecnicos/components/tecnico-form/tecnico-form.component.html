@@ -47,7 +47,11 @@
         <div class="row">
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese la cuadrilla</mat-label>
-                <input matInput placeholder="" formControlName="cuadrilla" required>
+                <mat-select formControlName="cuadrilla">
+                    <mat-option *ngFor="let nombre of nombresCuadrillas" [value]="nombre">
+                      {{nombre}}
+                    </mat-option>
+                  </mat-select>
                 <mat-error *ngIf="TecnicosForm.controls['cuadrilla'].invalid">error</mat-error>
             </mat-form-field>
         </div>
