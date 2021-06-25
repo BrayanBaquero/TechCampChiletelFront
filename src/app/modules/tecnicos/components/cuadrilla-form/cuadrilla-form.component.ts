@@ -59,8 +59,7 @@ export class CuadrillaFormComponent implements OnInit {
     agregarCuadrilla():void{
       this.cuadrillaService.agregarCuadrilla(this.cuadrilla).subscribe(
         msg=>{
-          console.log(msg);
-          this.notificacion.open("Cuadrilla agregada con exito!!","Cerrar",this.notConfig);
+          this.notificacion.open(msg.message,"",this.notConfig);
           this.dialogRef.close();
         },
         err=>{
@@ -74,7 +73,7 @@ export class CuadrillaFormComponent implements OnInit {
       this.cuadrillaService.actualizarCuadrilla(this.cuadrilla,this.cuadrilla.nombre).subscribe(
         msg=>{
           console.log(msg);
-          this.notificacion.open("Cuadrilla actualizada con exito!!","Cerrar",this.notConfig);
+          this.notificacion.open(msg.message,"",this.notConfig);
           this.dialogRef.close();
         },
         err=>{

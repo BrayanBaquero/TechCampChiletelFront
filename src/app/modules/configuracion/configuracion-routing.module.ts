@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ConfiguracionComponent } from './configuracion.component';
-import { TipoDanoComponent } from './pages/tipo-dano/tipo-dano.component';
-import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
+import { TipoDañoComponent } from './pages/tipo-daño/tipo-daño.component';
+import { TipoClienteComponent } from './pages/tipo-cliente/tipo-cliente.component';
 
 const routes: Routes = [
   {path:'',component:ConfiguracionComponent,
   children:[
-    {path:'daño',component:TipoDanoComponent},
-    {path:'usuario',component:TipoUsuarioComponent}
+    {path:'tipodano',component:TipoDañoComponent},
+    {path:'tipocliente',component:TipoClienteComponent}
   ]
   }
   

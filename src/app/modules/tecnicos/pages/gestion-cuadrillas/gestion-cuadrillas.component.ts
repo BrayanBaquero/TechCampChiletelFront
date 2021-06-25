@@ -43,7 +43,7 @@ export class GestionCuadrillasComponent implements OnInit {
     this.cuadrillaService.borrarCuadrilla(nombre).subscribe(
       msg=>{
         console.log(msg);
-        this.notificacion.open("Borrado con exito!!!","Cerrar",this.notConfig)
+        this.notificacion.open(msg.message,this.notConfig)
       },
       err=>{
         console.log(err);
