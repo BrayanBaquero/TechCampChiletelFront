@@ -1,1 +1,41 @@
-<p>tipo-usuario works!</p>
+<mat-card class="card">
+    <mat-card-header class="header">
+        <mat-card-title>Tipos de cliente</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="content">
+        <form [formGroup]="TiposClienteForm">
+            <ng-container formArrayName="tCliente">
+                <mat-table [dataSource]="tCliente.controls" class="mat-elevation-z8">
+
+                    <!-- Columna nombre -->
+                    <ng-container matColumnDef="nombre">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.get('nombre').value}}</mat-cell>
+                    </ng-container>
+
+                    <!-- Columna prioridad -->
+                    <ng-container matColumnDef="prioridad">
+                        <mat-header-cell *matHeaderCellDef> Prioridad</mat-header-cell>
+                        <mat-cell *matCellDef="let element" [formGroup]="element">
+                            <mat-form-field class="full-width" appearance="fill">
+                                <mat-label> Seleccione </mat-label>
+                                <mat-select formControlName="prioridad">
+                                    <mat-option *ngFor="let numero of prioridades" [value]="numero">
+                                        {{numero}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="element.hasError">La prioridad debe ser unica</mat-error>
+                            </mat-form-field>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="columnasTabla"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: columnasTabla;"></mat-row>
+                </mat-table>
+            </ng-container>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button type="submit" (click)="guardar()" color="primary" class=button
+            [disabled]="TiposClienteForm.invalid">Guardar</button>
+    </mat-card-actions>
+</mat-card>

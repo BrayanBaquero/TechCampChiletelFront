@@ -31,10 +31,18 @@ export class ConfiguracionService {
     return this.httpCient.put<TipoCliente[]>(this.URL+"/tipocliente",tCliente);
   }
 
-  /////Contruir fomularios 
+  /////Contruir fomularios tipos de daño
   public arrayFormTipoDaño():Observable<FormArray>{
     return this.listaTiposDaño().pipe(map((tiposDaño:TipoDaño[])=>{
       const fgs=tiposDaño.map(TipoDaño.tdFormGroup);
+      return new FormArray(fgs);
+    }));
+  }
+
+   /////Contruir fomularios tipos de cliente
+   public arrayFormTipoCliente():Observable<FormArray>{
+    return this.listaTiposCliente().pipe(map((tiposCliente:TipoCliente[])=>{
+      const fgs=tiposCliente.map(TipoCliente.tCFormGroup);
       return new FormArray(fgs);
     }));
   }

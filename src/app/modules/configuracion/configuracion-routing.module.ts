@@ -8,7 +8,8 @@ const routes: Routes = [
   {path:'',component:ConfiguracionComponent,
   children:[
     {path:'tipodano',component:TipoDañoComponent},
-    {path:'tipocliente',component:TipoClienteComponent}
+    {path:'tipocliente',component:TipoClienteComponent},
+    {path:'',component:TipoDañoComponent},
   ]
   }
   
