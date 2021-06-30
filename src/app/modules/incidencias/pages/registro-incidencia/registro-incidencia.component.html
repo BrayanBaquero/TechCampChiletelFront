@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Registro</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div >
+            <form [formGroup]="IncidenciaForm"  >
+                <div class="row">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Tipo de incidencia</mat-label>
+                        <mat-select formControlName="tipoDaño">
+                            <mat-option *ngFor="let nombre of tiposIncidencia" [value]="nombre">
+                              {{nombre}}
+                            </mat-option>
+                          </mat-select>
+                        <mat-error *ngIf="IncidenciaForm.controls['tipoDaño'].invalid">{{mssgError('cliente')}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Identificación de cliente</mat-label>
+                        <input matInput placeholder="" formControlName="cliente">
+                        <mat-error *ngIf="IncidenciaForm.controls['cliente'].hasError">{{mssgError('cliente')}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Descripción de la incidencia</mat-label>
+                        <textarea matInput placeholder="" formControlName="descripcion"></textarea>
+                        <mat-error *ngIf="IncidenciaForm.controls['descripcion'].hasError">{{mssgError('descripcion')}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class=button mat-raised-button color="primary" type="submit" 
+        (click)="enviar()"
+        [disabled]="IncidenciaForm.invalid">Guardar</button>
+    </mat-card-actions>
+</mat-card>
+
+
+
+

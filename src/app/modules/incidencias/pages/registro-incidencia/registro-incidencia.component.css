@@ -1,0 +1,29 @@
+.mat-card{
+    margin: 4rem auto;
+    width: 40%;
+}
+
+.mat-card-content{
+    margin: 1rem auto;
+}
+.mat-card-actions{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+  }
+
+  .full-width{
+      width: 100%;
+  }
+
+  .mat-card-header{
+      justify-content: center;
+  }
