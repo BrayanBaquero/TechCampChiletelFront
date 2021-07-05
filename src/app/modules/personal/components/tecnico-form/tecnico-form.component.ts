@@ -24,8 +24,9 @@ export class TecnicoFormComponent implements OnInit{
   /*Expreciones regulares para validación de campos */
   patronNumeros=/^[1-9]\d{6,18}$/;
   patronLetras=/^[a-z ,.'-]+$/i;
-  patronNumeroTelefonico=/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){10})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){10}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/;
-  
+  //patronNumeroTelefonico=/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){10})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){10}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/;
+  patronNumeroTelefonico=/^[1-9]\d{6,18}$/;
+
   //Definicion de campos de formulario para CRUD
   TecnicosForm=this.fb.group(
     {
