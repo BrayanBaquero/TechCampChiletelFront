@@ -9,14 +9,16 @@ import { VerIncidencia } from '../model/ver-incidencia';
 })
 export class IncidenciaService {
 
-  URL='http://localhost:8080/api/daño/'
+  URL='http://localhost:8080/api/daño'
   constructor(private httpClient:HttpClient) { }
 
-  public listaIncidencia():Observable<VerIncidencia[]>{
-    return this.httpClient.get<VerIncidencia[]>(this.URL);
+  public listaIncidencia(page:number, size:number):Observable<any[]>{
+    return this.httpClient.get<any[]>(this.URL+`?page=${page}&size=${size}`);
   }
 
   public registrarIncidencia(incidencia:RegistrarIncidencia):Observable<any>{
     return this.httpClient.post<RegistrarIncidencia>(this.URL,incidencia);
   }
+
+ 
 }

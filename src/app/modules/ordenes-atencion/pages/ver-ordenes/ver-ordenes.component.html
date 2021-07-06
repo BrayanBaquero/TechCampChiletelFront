@@ -1,30 +1,29 @@
-<p>ver-incidencia works!</p>
 <mat-card class="card">
     <mat-card-header class="header">
-        <mat-card-title>Incidencias</mat-card-title>
+        <mat-card-title>Ordenes de atención</mat-card-title>
     </mat-card-header>
     <mat-card-content class="content">
-        <table mat-table [dataSource]="incidencias" class="mat-elevation-z8">
+        <table mat-table [dataSource]="ordenesAtencion" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
         
             <!-- Position Column -->
-            <ng-container matColumnDef="cliente">
-            <th mat-header-cell *matHeaderCellDef>Cliente</th>
-            <td mat-cell *matCellDef="let element"> {{element.numeroIden}} </td>
+            <ng-container matColumnDef="numOrden">
+            <th mat-header-cell *matHeaderCellDef>Numero de orden</th>
+            <td mat-cell *matCellDef="let element"> {{element.numOrden}} </td>
             </ng-container>
         
             <!-- Name Column -->
-            <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef> Daño reportado</th>
-            <td mat-cell *matCellDef="let element"> {{element.tipoDano}} </td>
+            <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef>Identificación de cliente</th>
+            <td mat-cell *matCellDef="let element"> {{element.cliente}} </td>
             </ng-container>
         
             <!-- Weight Column -->
-            <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef> Fecha de reporte</th>
-            <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+            <ng-container matColumnDef="incidencia">
+            <th mat-header-cell *matHeaderCellDef>Tipo de daño</th>
+            <td mat-cell *matCellDef="let element"> {{element.incidencia}} </td>
             </ng-container>
         
         

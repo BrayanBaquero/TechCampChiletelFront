@@ -11,8 +11,8 @@ export class TecnicoService {
   URL='http://localhost:8080/api/tecnico/';
   constructor(private httpcClient:HttpClient) { }
 
-  public listaTecnicos():Observable<Tecnico[]>{
-    return this.httpcClient.get<Tecnico[]>(this.URL);
+  public listaTecnicos(page:number, size:number):Observable<Tecnico[]>{
+    return this.httpcClient.get<Tecnico[]>(this.URL+`?page=${page}&size=${size}`);
   }
 
   public agregarTecnico(tecnico:Tecnico):Observable<any>{

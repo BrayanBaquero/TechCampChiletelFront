@@ -10,6 +10,7 @@ const routes: Routes = [
       {path:'tecnicos',loadChildren:()=> import('../tecnicos/tecnicos.module').then(m=>m.TecnicosModule)},
       {path:'configuracion',loadChildren:()=> import('../configuracion/configuracion.module').then(m=>m.ConfiguracionModule)},
       {path:'incidencias',loadChildren:()=> import('../incidencias/incidencias.module').then(m=>m.IncidenciasModule)},
+      {path:'ordenes',loadChildren:()=> import('../ordenes-atencion/ordenes-atencion.module').then(m=>m.OrdenesAtencionModule)},
       {path:'',loadChildren:()=> import('../tecnicos/tecnicos.module').then(m=>m.TecnicosModule)}
      // {path: '**',redirectTo:'viewClient'}
     ]

@@ -1,5 +1,5 @@
 export interface VerIncidencia {
     numeroIden:string,
-    tipoDaño:string,
+    tipoDano:string,
     fecha:Date
 }

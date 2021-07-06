@@ -7,7 +7,7 @@
             <button mat-raised-button  (click)="openDialog(1,tecnico)" color="primary" class=button>+Nuevo</button>
         </mat-card-header>
         <mat-card-content class="content">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="tecnicos" class="mat-elevation-z8">
 
                 <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
@@ -49,6 +49,13 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            <mat-paginator #paginator
+                [length]="length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 20]"
+                (page)="pageEvent = eventPage($event)">
+            </mat-paginator>
         </mat-card-content>
     </mat-card>
 

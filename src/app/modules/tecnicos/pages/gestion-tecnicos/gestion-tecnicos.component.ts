@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TecnicoFormComponent } from '../../components/tecnico-form/tecnico-form.component';
 import { Tecnico } from '../../model/tecnico';
@@ -12,10 +13,13 @@ import { TecnicosModule } from '../../tecnicos.module';
   styleUrls: ['./gestion-tecnicos.component.css']
 })
 export class GestionTecnicosComponent implements OnInit {
+  page:number=0;
+  size:number=10;
+  length:number;
+  pageEvent: PageEvent;
 
   tecnicos:Tecnico[]=[];
   displayedColumns: string[] = ['nombre', 'numeroIden', 'tdano','cuadrilla','opciones'];
-  dataSource:any[];
   tecnico:Tecnico;
   datosForm:any;
   
@@ -26,22 +30,27 @@ export class GestionTecnicosComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.tecnicoService.listaTecnicos().subscribe(
+    this.llenarTabla();
+  }
+
+  eventPage(event?:PageEvent){
+    this.page=event.pageIndex;
+    this.size=event.pageSize;
+    this.llenarTabla();
+    return event;
+  }
+
+  //Obtener los datos de los tecnicos
+  llenarTabla():void{
+    this.tecnicoService.listaTecnicos(this.page,this.size).subscribe(
       data=>{
-        this.tecnicos=data;
-        console.log(this.tecnicos);
-        console.log(this.tecnicos[0].tdano);
-        this.llenarTabla(this.tecnicos);
+        this.tecnicos=data["content"];
+        this.length=data["totalElements"];
       },
       err=>{
         console.log(err);
       }
     );
-  }
-
-  //Obtener los datos de los tecnicos
-  llenarTabla(tecnicos:Tecnico[]):void{
-    this.dataSource=this.tecnicos;
   }
 
 
