@@ -9,7 +9,7 @@ const routes: Routes = [
   children:[
     {path:'tipodano',component:TipoDañoComponent},
     {path:'tipocliente',component:TipoClienteComponent},
-    {path:'',component:TipoDañoComponent},
+    {path:'',redirectTo:'tipodano',pathMatch:'full'},
   ]
   }
   

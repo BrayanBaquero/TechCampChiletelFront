@@ -1,8 +1,8 @@
 <mat-card class="card">
-    <mat-card-header class="header">
+    <mat-card-header>
         <mat-card-title>Tipos de cliente</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="content">
+    <mat-card-content>
         <form [formGroup]="TiposClienteForm">
             <ng-container formArrayName="tCliente">
                 <mat-table [dataSource]="tCliente.controls" class="mat-elevation-z8">
@@ -35,7 +35,8 @@
         </form>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button type="submit" (click)="guardar()" color="primary" class=button
+        <span></span>
+        <button mat-raised-button type="submit" (click)="guardar()" color="primary"
             [disabled]="TiposClienteForm.invalid">Guardar</button>
     </mat-card-actions>
 </mat-card>

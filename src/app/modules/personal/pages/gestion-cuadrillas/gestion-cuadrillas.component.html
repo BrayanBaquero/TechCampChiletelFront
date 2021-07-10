@@ -1,0 +1,44 @@
+<mat-card class="card">
+    <mat-card-header class="header">
+        <mat-card-title>Cuadrillas</mat-card-title>
+        <button mat-raised-button (click)="openDialog(1,cuadrilla)" color="primary" class=button>+Nuevo</button>
+    </mat-card-header>
+    <mat-card-content class="content">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Columna nombre -->
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.nombre}} {{element.apellido}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna miembros -->
+            <ng-container matColumnDef="miembros">
+                <mat-header-cell *matHeaderCellDef> Miembros</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.miembros}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna zonas -->
+            <ng-container matColumnDef="zonas">
+                <mat-header-cell *matHeaderCellDef> Zonas de atención </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.zona}} </mat-cell>
+            </ng-container>
+
+            <!-- Iconos opciones -->
+            <ng-container matColumnDef="opciones">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button>
+                        <mat-icon color="accent" (click)="openDialog(2,element)">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon color="accent" (click)="borrarTecnico(element.nombre)">delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <!-- Definicion de cabecera de tabla -->
+            <mat-header-row *matHeaderRowDef="columnasTabla"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnasTabla;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card>

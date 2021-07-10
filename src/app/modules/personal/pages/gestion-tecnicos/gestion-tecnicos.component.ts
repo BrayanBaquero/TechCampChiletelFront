@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TecnicoFormComponent } from '../../components/tecnico-form/tecnico-form.component';
 import { Tecnico } from '../../model/tecnico';
 import { TecnicoService } from '../../services/tecnico.service';
-import { TecnicosModule } from '../../tecnicos.module';
 
 @Component({
   selector: 'app-gestion-tecnicos',

@@ -1,36 +1,33 @@
 <mat-card class="card">
-    <mat-card-header class="header">
+    <mat-card-header>
         <mat-card-title>Ordenes de atención</mat-card-title>
     </mat-card-header>
     <mat-card-content class="content">
-        <table mat-table [dataSource]="ordenesAtencion" class="mat-elevation-z8">
+        <mat-table [dataSource]="ordenesAtencion" class="mat-elevation-z8">
 
-            <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-        
-            <!-- Position Column -->
+            <!--Columna Numero de orden -->
             <ng-container matColumnDef="numOrden">
-            <th mat-header-cell *matHeaderCellDef>Numero de orden</th>
-            <td mat-cell *matCellDef="let element"> {{element.numOrden}} </td>
+                <mat-header-cell *matHeaderCellDef>Numero de orden</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.numOrden}} </mat-cell>
             </ng-container>
-        
-            <!-- Name Column -->
+
+            <!-- Columna identificacion de cliente -->
             <ng-container matColumnDef="cliente">
-            <th mat-header-cell *matHeaderCellDef>Identificación de cliente</th>
-            <td mat-cell *matCellDef="let element"> {{element.cliente}} </td>
+                <mat-header-cell *matHeaderCellDef>Identificación de cliente</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.cliente}} </mat-cell>
             </ng-container>
-        
-            <!-- Weight Column -->
+
+            <!-- Columna tipo de daño -->
             <ng-container matColumnDef="incidencia">
-            <th mat-header-cell *matHeaderCellDef>Tipo de daño</th>
-            <td mat-cell *matCellDef="let element"> {{element.incidencia}} </td>
+                <mat-header-cell *matHeaderCellDef>Tipo de daño</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.incidencia}} </mat-cell>
             </ng-container>
-        
-        
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            
-        </table>
+
+            <!-- Definición de cabecera de tabla -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
         <mat-paginator #paginator
             [length]="length"
             [pageIndex]="0"

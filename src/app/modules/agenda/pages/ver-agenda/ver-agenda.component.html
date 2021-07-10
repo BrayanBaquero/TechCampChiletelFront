@@ -1,0 +1,38 @@
+<div class="container"  >
+    
+    <div class="c1">
+
+        <div class="columnTecnico" color="primary">
+            <mat-table mat-table [dataSource]="agendaTecnicos" >
+                <!--Columna tecnicos -->
+                <ng-container matColumnDef="tecnicos">
+                <mat-header-cell *matHeaderCellDef>Técnicos</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.tecnico}} </mat-cell>
+                </ng-container>
+            
+                <!--Definicion de titulo de columna-->
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" 
+                    (click)="selecTecnico(row)"
+                    [ngClass]="{highlighted: selectedRowIndex ==row.identificacion}" 
+                ></mat-row>
+            </mat-table>
+        </div>
+        <div class="pag">
+            <mat-paginator #paginator
+                [length]="length"
+                [pageIndex]="0"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 20]"
+                (page)="pageEvent = eventPage($event)">
+            </mat-paginator>
+        </div>
+        
+    </div>
+    <div class="c2">
+        <mat-card class="card">
+            <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
+        </mat-card>
+    </div>
+</div>
+

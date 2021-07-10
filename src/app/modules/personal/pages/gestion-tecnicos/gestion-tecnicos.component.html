@@ -1,0 +1,60 @@
+<mat-card class="card">
+    <mat-card-header class="header">
+        <mat-card-title>Tecnicos</mat-card-title>
+        <button mat-raised-button (click)="openDialog(1,tecnico)" color="primary" class=button>+Nuevo</button>
+    </mat-card-header>
+    <mat-card-content class="content">
+        <mat-table [dataSource]="tecnicos" class="mat-elevation-z8">
+
+            <!-- Columna nombre -->
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.nombre}} {{element.apellido}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna identificación -->
+            <ng-container matColumnDef="numeroIden">
+                <mat-header-cell *matHeaderCellDef> Identificación</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.numeroIden}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna tipo de daño -->
+            <ng-container matColumnDef="tdano">
+                <mat-header-cell *matHeaderCellDef> Tipo de daño </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.tdano}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna cuadrilla -->
+            <ng-container matColumnDef="cuadrilla">
+                <mat-header-cell *matHeaderCellDef> Cuadrilla</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.cuadrilla}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna iconos -->
+            <ng-container matColumnDef="opciones">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button>
+                        <mat-icon color="accent" (click)="openDialog(2,element)">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon color="accent" (click)="openDialog(3,element)">search</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon color="accent" (click)="borrarTecnico(element.numeroIden)">delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <!-- Definición de cabeceras de la tabla -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator 
+            [length]="length" 
+            [pageIndex]="0" 
+            [pageSize]="10" 
+            [pageSizeOptions]="[5, 10, 20]"
+            (page)="pageEvent = eventPage($event)">
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>

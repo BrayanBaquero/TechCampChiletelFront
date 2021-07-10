@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class NavegacionMenuComponent implements OnInit {
   nombreUsuario:string;
+  isLoged:boolean=false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,8 +20,10 @@ export class NavegacionMenuComponent implements OnInit {
       shareReplay()
     );
 
+  isLoged$ :Observable<boolean>;
+
   constructor(private breakpointObserver: BreakpointObserver,
-              private tokenService:TokenService,
+              public tokenService:TokenService,
               private router:Router
               ) {}
 
@@ -34,5 +37,7 @@ export class NavegacionMenuComponent implements OnInit {
     this.router.navigate(['/']);
 
   }
+
+  
 
 }

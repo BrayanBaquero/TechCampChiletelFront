@@ -69,10 +69,8 @@ export class TecnicoFormComponent implements OnInit{
         data=>{
           this.nombresCuadrillas=data;
         },
-        err=>{
-
-        }
-      )
+        err=>{}
+      );
     }
 
     cerrar(): void {

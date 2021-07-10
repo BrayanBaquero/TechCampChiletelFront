@@ -4,21 +4,4 @@
     width: 70%;
 }
 
-table {
-    width: 95%;
-    margin:1rem auto;
-  }
 
-.content{
-    padding-top: 1rem;
-}
-
-.button{
-
-    padding-top: 0px;
-}
-
-.header{
-    display: flex;
-    justify-content: space-between;
-}

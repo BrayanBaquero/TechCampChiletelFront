@@ -17,7 +17,11 @@ export class TokenService {
   public getToken():string{
     return sessionStorage.getItem(TOKEN_KEY);
   }
-
+  public existToken():boolean{
+    if(sessionStorage.getItem(TOKEN_KEY)!=null){
+      return true;
+    }else{return false}
+  }
   public setUserName(username:string):void{
     window.sessionStorage.removeItem(USERNAME_KEY);
     window.sessionStorage.setItem(USERNAME_KEY,username);

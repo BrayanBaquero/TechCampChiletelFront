@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JwtDTO } from '../interfaces/jwt-dto';
-import { LoginUsuario } from '../interfaces/login-usuario';
-import { NuevoUsuario } from '../interfaces/nuevo-usuario';
+import { JwtDTO } from '../model/jwt-dto';
+import { LoginUsuario } from '../model/login-usuario';
+import { NuevoUsuario } from '../model/nuevo-usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -20,3 +20,4 @@ export class AuthService {
     return this.httpcClient.post<JwtDTO>(this.authURL+'login',loginUsuario);
   }
 }
+

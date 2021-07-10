@@ -8,19 +8,39 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
+  height: 20vh;
+  display: block;
+  padding-top: 10%;
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
-  top: 0;
+  top:0;
   z-index: 1;
 }
 
 
-.logout{
-  align-content: flex-end;
+.logout .mat-icon{
+  color: #E3F2FD;
+}
+.fx-spacer {
+  flex: 1 1 auto;
+}
+#iconUser .mat-icon{
+  font-size: 70px;
+  transform: scale(1);
+}
+#username{
+  padding-left: 8px;
 }
 
 .active{
-  background-color: rgb(39, 186, 231);
+  background-color:#E3F2FD;
+  color: #2196F3;
+}
+.text{
+  margin-left: 2rem;
+}
+.icon-color{
+  color: #2196F3 ;
 }

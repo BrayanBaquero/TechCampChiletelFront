@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const MODULESMATERIAL=[
   MatCardModule,
@@ -32,7 +33,8 @@ const MODULESMATERIAL=[
   MatFormFieldModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatGridListModule
 ]
 
 @NgModule({

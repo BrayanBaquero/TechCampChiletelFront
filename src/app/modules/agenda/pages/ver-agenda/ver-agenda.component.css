@@ -1,0 +1,58 @@
+/* .card{
+    margin:auto; 
+   position: absolute;
+   
+    margin-top: 5%;
+    width: 75%;
+}
+*/
+.columnTecnico{
+    height: 87%;
+    overflow: hidden auto;
+    /* background: var(--color-primary); */
+    background: white;
+} 
+.pag{
+    height: 10%;
+}
+
+.container{
+    display: flex;
+}
+.c1{
+    height: 90vh;
+    width: 20%;
+    flex: 0 0 200px;
+}
+.c2{
+    width: 80%;
+    flex:1 ;
+}
+.fc { /* the calendar root */
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 85vh;
+  }
+
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    /* border-color: currentColor; */
+    background-color: #E3F2FD ;
+  }
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+ 
+  
+  .mat-row.highlighted {
+    background: lightblue;
+    }

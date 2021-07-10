@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NumericValueType, RxwebValidators } from '@rxweb/reactive-form-validators';
-import { TecnicoService } from 'src/app/modules/tecnicos/services/tecnico.service';
 import { RegistrarIncidencia } from '../../model/registrar-incidencia';
 import { IncidenciaService } from '../../service/incidencia.service';
 

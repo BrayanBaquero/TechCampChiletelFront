@@ -15,8 +15,8 @@ export class VerOrdenesComponent implements OnInit {
   length:number;
   pageEvent: PageEvent;
 
-  ordenesAtencion:OrdenAtencion[];
-  displayedColumns: string[] =['numOrden','cliente','incidencia'];
+  ordenesAtencion:OrdenAtencion[];//Data-source de tabla
+  displayedColumns: string[] =['numOrden','cliente','incidencia'];//Columnas de tabla
 
   constructor(private ordenAtencionservice: OrdenAtencionService) { }
 
@@ -24,16 +24,18 @@ export class VerOrdenesComponent implements OnInit {
     this.llenarTabla();
   }
 
+ //Evento de interaccion con paginador
   eventPage(event?:PageEvent){
     this.page=event.pageIndex;
     this.size=event.pageSize;
     this.llenarTabla();
     return event;
   }
+
+  //Llamado a api para obtener datos y llenar la tabla
   llenarTabla():void{
     this.ordenAtencionservice.listaOrdenesAtencion(this.page,this.size).subscribe(
       data=>{
-        
         this.ordenesAtencion=data["content"];
         this.length=data["totalElements"];
         console.log(this.ordenesAtencion);

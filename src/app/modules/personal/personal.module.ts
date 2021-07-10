@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TecnicosComponent } from './tecnicos.component';
+import { PersonalComponent } from './personal.component';
 import { GestionTecnicosComponent } from './pages/gestion-tecnicos/gestion-tecnicos.component';
 import { GestionCuadrillasComponent } from './pages/gestion-cuadrillas/gestion-cuadrillas.component';
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
-import { TecnicosRoutingModule } from './tecnicos-routing.module';
+import { PersonalRoutingModule } from './personal-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TecnicoService } from './services/tecnico.service';
 import { interceptorProvider } from 'src/app/shared/interceptors/prod-interceptor.service';
@@ -18,7 +18,7 @@ import { CuadrillaFormComponent } from './components/cuadrilla-form/cuadrilla-fo
 
 @NgModule({
   declarations: [
-    TecnicosComponent, 
+    PersonalComponent, 
     GestionTecnicosComponent, 
     GestionCuadrillasComponent, 
     TabMenuComponent, 
@@ -27,7 +27,7 @@ import { CuadrillaFormComponent } from './components/cuadrilla-form/cuadrilla-fo
   imports: [
     CommonModule,
     FormsModule,
-    TecnicosRoutingModule,
+    PersonalRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule
@@ -38,4 +38,4 @@ import { CuadrillaFormComponent } from './components/cuadrilla-form/cuadrilla-fo
     interceptorProvider
   ],
 })
-export class TecnicosModule { }
+export class PersonalModule { }

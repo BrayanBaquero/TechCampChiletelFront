@@ -21,4 +21,5 @@ table {
 .header{
     display: flex;
     justify-content: space-between;
+    padding-right: 3%;
 }

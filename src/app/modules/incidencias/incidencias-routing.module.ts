@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: 'registro', component: RegistroIncidenciaComponent },
       { path: 'ver', component: VerIncidenciaComponent },
-      { path: '', component: RegistroIncidenciaComponent }
+      { path: '',redirectTo:'registro',pathMatch:'full', component: RegistroIncidenciaComponent }
     ]
   }
 

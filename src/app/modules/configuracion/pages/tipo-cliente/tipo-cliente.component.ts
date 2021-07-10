@@ -49,8 +49,6 @@ export class TipoClienteComponent implements OnInit {
 
 
   guardar(): void {
-    console.log("hola")
-
     this.EnvioDatos = this.TiposClienteForm.get('tCliente').value;
     console.log(this.EnvioDatos);
     this.configuracionService.actualizarTiposCliente(this.EnvioDatos).subscribe(
