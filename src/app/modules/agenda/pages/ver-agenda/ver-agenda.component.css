@@ -1,11 +1,4 @@
-/* .card{
-    margin:auto; 
-   position: absolute;
-   
-    margin-top: 5%;
-    width: 75%;
-}
-*/
+
 .columnTecnico{
     height: 87%;
     overflow: hidden auto;
@@ -51,8 +44,7 @@
     cursor: pointer;
   }
   
- 
-  
   .mat-row.highlighted {
     background: lightblue;
     }
+

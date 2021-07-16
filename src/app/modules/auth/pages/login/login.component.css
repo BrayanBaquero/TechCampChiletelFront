@@ -1,6 +1,6 @@
 .formCard{
     margin: 5rem auto;
-    width: 30%;
+    width: 35%;
 }
 
 .row {
@@ -8,17 +8,27 @@
     flex-direction: row;
     align-items:center;
     justify-content: center;
+    margin-top: 6%;
   }
 
+ .icon .mat-icon{
+    font-size: 80px;
+    height: fit-content;
+    width: fit-content;
+}
   .full-width{
-      width: 100%;
-  }
-
-  .icon{
-      color:gray;
+      width: 85%;
   }
 
   .mat-card-header{
       justify-content: center;
+  }
+  .mat-card-title{
+      text-align: center;
+      height: min-content;
+  }
+
+  .mat-card-actions{
+      text-align: center;
   }
 

@@ -2,8 +2,8 @@
     <mat-card-header>
         <mat-card-title>Incidencias</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-        <mat-table [dataSource]="incidencias" class="mat-elevation-z8">
+    <mat-card-content  class="mat-elevation-z8">
+        <mat-table [dataSource]="incidencias">
 
             <!--Columna cliente -->
             <ng-container matColumnDef="cliente">
@@ -14,17 +14,17 @@
             <!-- Columna Daño reportado -->
             <ng-container matColumnDef="tipo">
             <mat-header-cell *matHeaderCellDef> Daño reportado</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.tipoDano}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.tipoDano |titlecase}} </mat-cell>
             </ng-container>
         
             <!-- Columna Fecha de reporte -->
             <ng-container matColumnDef="fecha">
             <mat-header-cell *matHeaderCellDef> Fecha de reporte</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.fecha |date:'medium'}} </mat-cell>
             </ng-container>
         
              <!-- Definición cabecera de tabla -->
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             
         </mat-table>

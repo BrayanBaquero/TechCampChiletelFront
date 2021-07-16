@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NavegacionMenuComponent } from './navegacion-menu.component';
-import { TecnicosGuardService as guard } from '../../shared/guards/prod-guard.service';
+import { ProdGuardService as guard } from '../../shared/guards/prod-guard.service';
 
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
       {path:'ordenes',loadChildren:()=> import('../ordenes-atencion/ordenes-atencion.module').then(m=>m.OrdenesAtencionModule),canActivate: [guard],data: { expectedRol: ['admin', 'user']}},
       {path:'agenda',loadChildren:()=> import('../agenda/agenda.module').then(m=>m.AgendaModule),canActivate: [guard],data: { expectedRol: ['admin', 'user']}},
       {path:'autenticacion',loadChildren:()=> import('../auth/auth.module').then(m=>m.AuthModule)},
-      {path:'',loadChildren:()=> import('../auth/auth.module').then(m=>m.AuthModule)},
+      {path:'',redirectTo:'autenticacion'},
       // {path:'',loadChildren:()=> import('../personal/personal.module').then(m=>m.PersonalModule)}
      // {path: '**',redirectTo:'viewClient'}
     ]

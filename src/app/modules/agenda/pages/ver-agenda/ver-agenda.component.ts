@@ -41,6 +41,7 @@ export class VerAgendaComponent implements OnInit {
   events:any[];     //Array donde se almacenan eventos que se vizualizaran en fullCalendar
   selectedRowIndex:any;
 
+  progressBar:boolean=false;
   
 
   constructor(private agendaService:AgendaService,
@@ -53,7 +54,6 @@ export class VerAgendaComponent implements OnInit {
       plugins: [timeGridPlugin,dayGridPlugin, interactionPlugin],
       initialView: 'timeGridWeek',
       //eventColor:'blue',
-      //aspectRatio:3.2,
       slotMinTime:'08:00:00',//Hora inicio
       slotMaxTime:'16:00:00',//Hora final
       expandRows:true,  //Expandir alto de columnas para adaptarce a tamaño de calendario
@@ -75,6 +75,10 @@ export class VerAgendaComponent implements OnInit {
         next:{
           text:">",
           click:this.semanaSiguiente.bind(this)
+        },
+        today:{
+          text:"Semana actual",
+          click:this.semanaActual.bind(this)
         },
         agendar:{
           text:"Generar agenda",
@@ -99,9 +103,9 @@ export class VerAgendaComponent implements OnInit {
         this.agendaTecnicos=data["content"];//Lista de tecnicos activos paginados size default=10
         this.length=data["totalElements"];//Total de tecnicos activos
         if(this.agendaTecnicos.length>0){
-          this.tecnicoSeleccionado=this.agendaTecnicos[0].identificacion;
-          //this.obtenerAgendaTecnico();
-          this.selectedRowIndex=this.agendaTecnicos[0].identificacion;//Cambiar solor al primer tecnico si existe
+          this.tecnicoSeleccionado=this.agendaTecnicos[0].numeroIden;
+          this.obtenerAgendaTecnico();
+          this.selectedRowIndex=this.agendaTecnicos[0].numeroIden;//Cambiar solor al primer tecnico si existe
         }
 
       },
@@ -117,7 +121,7 @@ export class VerAgendaComponent implements OnInit {
         this.events=[];
         //Llenar array de eventos para cargar en fullCalendar
         this.agendaEventos.forEach(elm=>{
-          this.events.push({title:elm.ord_Id,start:elm.inicio,end:elm.final});
+          this.events.push({title:"#Orden: "+elm.ord_Id,start:elm.inicio,end:elm.final,id:elm.ord_Id});
         });
         //console.log(this.events);
         this.calendarOptions.events=this.events;//Cargar eventos en el calendario
@@ -127,8 +131,8 @@ export class VerAgendaComponent implements OnInit {
 
   //Evento que se llama al seleccionar un tecnico, se obtiene la identificacion del tecnico y se obtiene la agenda del mismo
   selecTecnico(row){
-    this.selectedRowIndex = row.identificacion;
-    this.tecnicoSeleccionado=row.identificacion;
+    this.selectedRowIndex = row.numeroIden;
+    this.tecnicoSeleccionado=row.numeroIden;
     //console.log(this.selectedRowIndex);
     this.obtenerAgendaTecnico();
   }
@@ -141,12 +145,14 @@ export class VerAgendaComponent implements OnInit {
     this.calendarComponent.getApi().next();
     this.obtenerAgendaTecnico();
   }
+  semanaActual(arg){
+    this.calendarComponent.getApi().today();
+    this.obtenerAgendaTecnico();
+  }
   
   ObetenerRangoFechasCalendario(){
     this.fechaInicio=this.cambiarFormatoFecha(this.calendarComponent.getApi().view.activeStart);
     this.fechaFinal=this.cambiarFormatoFecha(this.calendarComponent.getApi().view.activeEnd);
-    console.log(this.fechaInicio);
-    console.log(this.fechaFinal);
   }
   cambiarFormatoFecha(fecha:Date):string{
     let mes=fecha.getMonth()+1;
@@ -156,11 +162,16 @@ export class VerAgendaComponent implements OnInit {
   //La funcion se ejecuta cuado se da clic en "Generar Agenda" y se encarga de mediante una peticion post llamar al 
   //Procedimeinto almacenado encargado de realizar el proceso masivo.
   agendar(){
+    this.progressBar=true;
     this.agendaService.generarAgenda().subscribe(
       data=>{
+        if(data.message=1){
+          this.progressBar=false;
+        }
         console.log("resp: "+data.message);
       },
       err=>{
+        this.progressBar=false;
         console.log(err.error.message);
         //alert("err: "+err.g);
       }
@@ -169,10 +180,10 @@ export class VerAgendaComponent implements OnInit {
 
   //Ver detalles del evento o orden de atencion agenda al dar click sobre el calendario
   detallesEvento(event){
-    let id_ord=event.event._def.title;
+    var id_ord=event.event._def.publicId;
     const dialogRef = this.dialog.open(DetallesEventoComponent, {
       //width: '350px',
-      data:this.agendaEventos.find(ele=>ele.ord_Id=id_ord),
+      data:this.agendaEventos.find(ele=>ele.ord_Id==id_ord),
       //disableClose: true
     });
   }

@@ -38,7 +38,6 @@ export class VerOrdenesComponent implements OnInit {
       data=>{
         this.ordenesAtencion=data["content"];
         this.length=data["totalElements"];
-        console.log(this.ordenesAtencion);
       },
       err=>{console.log(err)}
     );

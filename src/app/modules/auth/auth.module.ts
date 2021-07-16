@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
+import { AuthComponent } from './auth.component';
 
 
 
@@ -18,7 +19,8 @@ import { AuthService } from './service/auth.service';
   declarations: [
     RegisterComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    AuthComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder ,Validators} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -43,6 +43,11 @@ export class LoginComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    //Validar si hay una sesion iniciada redirigira al usuario a la vista por defecto
+    if(this.tokenService.getToken()){
+      this.router.navigate(['/personal']);
+    }
+
     this.titleService.setTitle("Formulario");
     if(this.tokenService.getToken()){
       this.isLogged=true;

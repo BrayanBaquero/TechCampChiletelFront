@@ -35,7 +35,7 @@ export class VerIncidenciaComponent implements OnInit {
       data=>{
         this.incidencias=data["content"];
         this.length=data["totalElements"]
-        console.log(this.incidencias);
+        //console.log(this.incidencias);
       },
       err=>{
         console.log(err);

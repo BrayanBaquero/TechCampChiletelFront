@@ -3,6 +3,7 @@
 <div >
     <form [formGroup]="TecnicosForm"  >
         <div class="row">
+            <!--Nombre-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese nombre</mat-label>
                 <input matInput placeholder="" formControlName="nombre" required>
@@ -10,6 +11,7 @@
             </mat-form-field>
         </div>
         <div class="row">
+            <!--Apellido-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese el apellido</mat-label>
                 <input matInput placeholder="" formControlName="apellido" required>
@@ -17,6 +19,7 @@
             </mat-form-field>
         </div>
         <div class="row">
+            <!--Identificación-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese el numero de identificación</mat-label>
                 <input matInput placeholder="" formControlName="numeroIden">
@@ -24,6 +27,7 @@
             </mat-form-field>
         </div>
         <div class="row">
+            <!--Email-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese el email</mat-label>
                 <input matInput placeholder="" formControlName="email" required>
@@ -31,6 +35,7 @@
             </mat-form-field>
         </div>
         <div class="row">
+            <!--Numero de telefono-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese el numero de telefono</mat-label>
                 <input matInput placeholder="" formControlName="telefono" required>
@@ -38,6 +43,7 @@
             </mat-form-field>
         </div>
         <div class="row">
+            <!--Dirección-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese la dirección</mat-label>
                 <input matInput placeholder="" formControlName="direccion" required>
@@ -45,6 +51,7 @@
             </mat-form-field>
         </div>
         <div class="row">
+            <!--Cuadrilla-->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Ingrese la cuadrilla</mat-label>
                 <mat-select formControlName="cuadrilla">
@@ -52,7 +59,7 @@
                       {{nombre}}
                     </mat-option>
                   </mat-select>
-                <mat-error *ngIf="TecnicosForm.controls['cuadrilla'].invalid">error</mat-error>
+                <mat-error *ngIf="TecnicosForm.controls['cuadrilla'].hasError">{{mssgError('cuadrilla')}}</mat-error>
             </mat-form-field>
         </div>
         <div class="row">
@@ -60,12 +67,12 @@
                 <mat-label>Tipos de daño</mat-label>
                 <mat-select formControlName="tdano" multiple>
                     <mat-select-trigger>
-                        {{TecnicosForm.get('tdano').value? TecnicosForm.get('tdano').value[0] : ''}}
+                        {{TecnicosForm.get('tdano').value? TecnicosForm.get('tdano').value[0]: ''}}
                         <span *ngIf="TecnicosForm.get('tdano').value.length > 1" class="example-additional-selection">
                         (+{{TecnicosForm.get('tdano').value.length - 1}} {{TecnicosForm.get('tdano').value.length === 2 ? 'otro' : 'otros'}})
                         </span>
                     </mat-select-trigger>
-                    <mat-option *ngFor="let dano of danosList" [value]="dano">{{dano}}</mat-option>
+                    <mat-option *ngFor="let dano of danosList" [value]="dano">{{dano |titlecase}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="TecnicosForm.controls['tdano'].hasError">{{mssgError('tdano')}}</mat-error>
             </mat-form-field>

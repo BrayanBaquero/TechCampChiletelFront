@@ -1,3 +1,5 @@
+
+<mat-progress-bar mode="query" *ngIf="progressBar" color="warn"></mat-progress-bar>
 <div class="container"  >
     
     <div class="c1">
@@ -7,14 +9,16 @@
                 <!--Columna tecnicos -->
                 <ng-container matColumnDef="tecnicos">
                 <mat-header-cell *matHeaderCellDef>Técnicos</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.tecnico}} </mat-cell>
+                <mat-cell *matCellDef="let element">{{element.nombre}} {{element.apellido}}<br>
+                    {{element.numeroIden}}
+                </mat-cell>
                 </ng-container>
             
                 <!--Definicion de titulo de columna-->
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;" 
                     (click)="selecTecnico(row)"
-                    [ngClass]="{highlighted: selectedRowIndex ==row.identificacion}" 
+                    [ngClass]="{highlighted: selectedRowIndex ==row.numeroIden}" 
                 ></mat-row>
             </mat-table>
         </div>
@@ -29,8 +33,8 @@
         </div>
         
     </div>
-    <div class="c2">
-        <mat-card class="card">
+    <div class="c2" >
+        <mat-card class="card" >
             <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
         </mat-card>
     </div>

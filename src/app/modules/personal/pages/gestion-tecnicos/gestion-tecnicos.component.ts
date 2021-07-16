@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MensajeConfirmacionComponent } from '../../components/mensaje-confirmacion/mensaje-confirmacion.component';
 import { TecnicoFormComponent } from '../../components/tecnico-form/tecnico-form.component';
 import { Tecnico } from '../../model/tecnico';
 import { TecnicoService } from '../../services/tecnico.service';
@@ -17,11 +18,19 @@ export class GestionTecnicosComponent implements OnInit {
   length:number;
   pageEvent: PageEvent;
 
+  
+
   tecnicos:Tecnico[]=[];
   displayedColumns: string[] = ['nombre', 'numeroIden', 'tdano','cuadrilla','opciones'];
   tecnico:Tecnico;
   datosForm:any;
+  notConfig:any={
+    duration:5000
+  }
   
+  isOpen = false;
+  triggerOrigin:any;//Referencia a usada para mostrar overlay de tipos de daño
+  tdanosRowelement:string[];
 
   constructor(private tecnicoService:TecnicoService,
               public dialog:MatDialog,
@@ -30,6 +39,13 @@ export class GestionTecnicosComponent implements OnInit {
 
   ngOnInit(): void {
     this.llenarTabla();
+  }
+
+  //Activar la informacion adicional de tipos de daño
+  toggle(trigger:any,rowEl:string[]){
+    this.triggerOrigin=trigger;
+    this.tdanosRowelement=rowEl;
+    this.isOpen=!this.isOpen;
   }
 
   eventPage(event?:PageEvent){
@@ -53,17 +69,25 @@ export class GestionTecnicosComponent implements OnInit {
   }
 
 
-
   borrarTecnico(identificacion:number):void{
-    this.tecnicoService.borrarTecnico(identificacion).subscribe(
-      msg=>{
-        console.log(msg);
-        this.notificacion.open("Borrado con exito!!!","Cerrar")
-      },
-      err=>{
-        console.log(err);
+    const dialogRef = this.dialog.open(MensajeConfirmacionComponent, {
+      width: '400px',
+      data:"Esta seguro que desea eliminar al técnico seleccionado?",
+      disableClose:true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result==true){
+        this.tecnicoService.borrarTecnico(identificacion).subscribe(
+          msg=>{
+            this.notificacion.open(msg.message,"",this.notConfig);
+            this.llenarTabla();
+          },
+          err=>{ console.log(err);}
+        );
       }
-    )
+      
+    });
+    
   }
 
   //Abrir formulario para agregar y editar usuario;
@@ -94,10 +118,8 @@ export class GestionTecnicosComponent implements OnInit {
   //Recibe los datos diligenciados en el formulario y llama a la función correspondiente 
   //para acceder al servicio y enviar los datos.
   dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
     this.tecnico=result;
-    //this.agregarTecnico();
-    console.log(result);
+    this.llenarTabla();
   });
   }
   

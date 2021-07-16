@@ -11,8 +11,8 @@ export class CuadrillaService {
   URL='http://localhost:8080/api/cuadrilla/';
   constructor(private httpClient:HttpClient) { }
 
-  public listaCuadrilla():Observable<Cuadrilla[]>{
-    return this.httpClient.get<Cuadrilla[]>(this.URL);
+  public listaCuadrilla(page:number,size:number):Observable<Cuadrilla[]>{
+    return this.httpClient.get<Cuadrilla[]>(this.URL+`?page=${page}&size=${size}`);
   }
 
   public listaNombresCuadrillas():Observable<string[]>{

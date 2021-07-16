@@ -4,4 +4,12 @@
     width: 70%;
 }
 
+.mat-table{
+    height:90%;
+    overflow: auto;
+}
 
+.mat-card-content{
+    height: 70vh;
+    margin-top: 1%;
+}

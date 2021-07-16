@@ -16,6 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const MODULESMATERIAL=[
   MatCardModule,
@@ -34,7 +36,9 @@ const MODULESMATERIAL=[
   MatSelectModule,
   MatSnackBarModule,
   MatPaginatorModule,
-  MatGridListModule
+  MatGridListModule,
+  OverlayModule,
+  MatProgressBarModule
 ]
 
 @NgModule({

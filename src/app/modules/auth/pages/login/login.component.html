@@ -1,15 +1,16 @@
 
 <mat-card class="formCard">
     <mat-card-header>
-        <mat-card-title>LOGIN</mat-card-title>
+        <mat-card-title>
+            LOGIN
+            <div class="icon"><mat-icon class="icon" >account_circle</mat-icon></div> 
+        </mat-card-title>
         
     </mat-card-header>
     <mat-card-content>
         
         <form [formGroup]="loginForm">
-            <div class="row">
-                <mat-icon class="icon" style=" transform: scale(3);padding: 1.5rem;">person_pin</mat-icon>
-            </div> 
+            
             <div class="row">
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Ingrese el usuario</mat-label>
@@ -27,13 +28,13 @@
                     <mat-error *ngIf="loginForm.controls['password'].hasError">{{mssgError('password')}}</mat-error>
                   </mat-form-field>
             </div>
-            <div class="row">
-                <button mat-raised-button color="primary" type="submit" class=button (click)="onLogin()">Ingresar</button>
-            </div>
+           
         </form>
     </mat-card-content>
     <mat-card-actions>
-        
+        <div >
+            <button mat-raised-button color="primary" type="submit" class=button (click)="onLogin()">Ingresar</button>
+        </div>
       </mat-card-actions>
 </mat-card>
 

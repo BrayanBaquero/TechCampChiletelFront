@@ -2,8 +2,8 @@
     <mat-card-header>
         <mat-card-title>Ordenes de atención</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="content">
-        <mat-table [dataSource]="ordenesAtencion" class="mat-elevation-z8">
+    <mat-card-content class="content" class="mat-elevation-z8">
+        <mat-table [dataSource]="ordenesAtencion" >
 
             <!--Columna Numero de orden -->
             <ng-container matColumnDef="numOrden">
@@ -20,11 +20,11 @@
             <!-- Columna tipo de daño -->
             <ng-container matColumnDef="incidencia">
                 <mat-header-cell *matHeaderCellDef>Tipo de daño</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.incidencia}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.incidencia | titlecase}}</mat-cell>
             </ng-container>
 
             <!-- Definición de cabecera de tabla -->
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
         </mat-table>

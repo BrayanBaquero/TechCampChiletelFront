@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PersonalComponent } from './personal.component';
 import { GestionTecnicosComponent } from './pages/gestion-tecnicos/gestion-tecnicos.component';
 import { GestionCuadrillasComponent } from './pages/gestion-cuadrillas/gestion-cuadrillas.component';
-import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 import { PersonalRoutingModule } from './personal-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TecnicoService } from './services/tecnico.service';
@@ -13,6 +12,7 @@ import { TecnicoFormComponent } from './components/tecnico-form/tecnico-form.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CuadrillaService } from './services/cuadrilla.service';
 import { CuadrillaFormComponent } from './components/cuadrilla-form/cuadrilla-form.component';
+import { MensajeConfirmacionComponent } from './components/mensaje-confirmacion/mensaje-confirmacion.component';
 
 
 
@@ -21,9 +21,8 @@ import { CuadrillaFormComponent } from './components/cuadrilla-form/cuadrilla-fo
     PersonalComponent, 
     GestionTecnicosComponent, 
     GestionCuadrillasComponent, 
-    TabMenuComponent, 
     TecnicoFormComponent, 
-    CuadrillaFormComponent],
+    CuadrillaFormComponent, MensajeConfirmacionComponent],
   imports: [
     CommonModule,
     FormsModule,

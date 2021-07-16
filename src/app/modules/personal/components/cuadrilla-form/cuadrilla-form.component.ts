@@ -27,10 +27,10 @@ export class CuadrillaFormComponent implements OnInit {
   );
 
   constructor(public dialogRef: MatDialogRef<GestionCuadrillasComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any,
-    private fb: FormBuilder,
-    private cuadrillaService:CuadrillaService,
-    private notificacion:MatSnackBar) { }
+              @Inject(MAT_DIALOG_DATA) public data:any,
+              private fb: FormBuilder,
+              private cuadrillaService:CuadrillaService,
+              private notificacion:MatSnackBar) { }
 
   ngOnInit(): void {
     if(this.data.cuadrilla!=null){

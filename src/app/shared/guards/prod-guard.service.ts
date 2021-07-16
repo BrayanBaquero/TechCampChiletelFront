@@ -5,7 +5,7 @@ import { TokenService } from '../services/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TecnicosGuardService implements CanActivate {
+export class ProdGuardService implements CanActivate {
 
   realRol: string;
 
@@ -15,6 +15,7 @@ export class TecnicosGuardService implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    //console.log("ActiveRoute: "+route.url+" State: "+state);
     const expectedRol = route.data.expectedRol;
     const roles = this.tokenService.getAuthorities();
     this.realRol = 'user';

@@ -17,6 +17,9 @@ export class TecnicoFormComponent implements OnInit{
   tecnico:Tecnico;
   danosList: string[] = ['total', 'parcial', 'esporadica'];
   nombresCuadrillas:string[];
+  notConfig:any={
+    duration:5000
+  }
   //Definicion de campos de formulario para CRUD
   TecnicosForm=this.fb.group(
     {
@@ -92,8 +95,8 @@ export class TecnicoFormComponent implements OnInit{
     agregarTecnico():void{
       this.tecnicoService.agregarTecnico(this.tecnico).subscribe(
         msg=>{
-          console.log(msg);
-          this.notificacion.open("Tecnico agregado con exito!!","Cerrar");
+          //this.notificacion.open("Tecnico agregado con exito!!","Cerrar");
+          this.notificacion.open(msg.message,"",this.notConfig);
           this.dialogRef.close();
         },
         err=>{
@@ -106,7 +109,7 @@ export class TecnicoFormComponent implements OnInit{
     actualizarTecnico():void{
       this.tecnicoService.actualizarTecnico(this.tecnico,this.tecnico.numeroIden).subscribe(
         msg=>{
-          console.log(msg)
+          this.notificacion.open(msg.message,"",this.notConfig);
           this.dialogRef.close();
         },
         err=>{

@@ -2,8 +2,8 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false"
-      *ngIf="tokenService.existToken()">
+      [opened]="((isHandset$ | async) === false) && tokenService.existToken()"
+      >
     <mat-toolbar>
       <div id="iconUser"><mat-icon color="accent" >account_circle</mat-icon></div>
       <div id="username">{{this.tokenService.getUserName()}}</div>
@@ -46,10 +46,10 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="(isHandset$ | async) && tokenService.existToken()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Chiletel</span>
+      <img src="../../../assets/logo.svg">
       <span class="fx-spacer"></span>
       <button mat-icon-button matSuffix (click)="logOut()" class="logout">
         <mat-icon color="accent" *ngIf="tokenService.existToken()">logout</mat-icon>

@@ -1,10 +1,10 @@
 <mat-card class="card">
     <mat-card-header class="header">
-        <mat-card-title>Tecnicos</mat-card-title>
+        <mat-card-title>Técnicos</mat-card-title>
         <button mat-raised-button (click)="openDialog(1,tecnico)" color="primary" class=button>+Nuevo</button>
     </mat-card-header>
-    <mat-card-content class="content">
-        <mat-table [dataSource]="tecnicos" class="mat-elevation-z8">
+    <mat-card-content class="content" class="mat-elevation-z8">
+        <mat-table [dataSource]="tecnicos" >
 
             <!-- Columna nombre -->
             <ng-container matColumnDef="nombre">
@@ -21,7 +21,18 @@
             <!-- Columna tipo de daño -->
             <ng-container matColumnDef="tdano">
                 <mat-header-cell *matHeaderCellDef> Tipo de daño </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.tdano}} </mat-cell>
+                <mat-cell *matCellDef="let element" > 
+                    <button mat-button class="btn" 
+                            (click)="toggle(trigger,element.tdano)" 
+                            cdkOverlayOrigin
+                            #trigger="cdkOverlayOrigin">
+                        {{element.tdano? (element.tdano[0]|titlecase): ''}}
+                        <span *ngIf="element.tdano.length > 1">
+                             (+{{element.tdano.length - 1}})
+                        </span>
+                    </button>
+                   
+                </mat-cell>
             </ng-container>
 
             <!-- Columna cuadrilla -->
@@ -46,8 +57,8 @@
                 </mat-cell>
             </ng-container>
             <!-- Definición de cabeceras de la tabla -->
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
         </mat-table>
         <mat-paginator #paginator 
             [length]="length" 
@@ -58,3 +69,16 @@
         </mat-paginator>
     </mat-card-content>
 </mat-card>
+
+
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="triggerOrigin"
+    [cdkConnectedOverlayOpen]="isOpen"
+    let-variable="vari"
+>
+<ul class="example-list">
+  <li *ngFor="let rowEl of tdanosRowelement">{{rowEl |titlecase}}</li> 
+</ul>
+</ng-template>

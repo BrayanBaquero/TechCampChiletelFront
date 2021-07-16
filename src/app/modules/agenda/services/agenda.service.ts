@@ -20,7 +20,7 @@ export class AgendaService {
     return this.httpClient.get<AgendaEventos[]>(this.URL+`/${ident}/tecnico?fechaInicio=${fechaInicio}&fechaFinal=${fechaFinal}`);
   }
   public generarAgenda():Observable<any>{
-    return this.httpClient.post<any>(this.URL,'hola');
+    return this.httpClient.post<any>(this.URL,null);
   }
   
 }
