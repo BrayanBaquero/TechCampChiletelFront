@@ -16,7 +16,7 @@ export class CuadrillaFormComponent implements OnInit {
   patronNombre=/^([A-Za-z])+$/;
 
   cuadrilla:AddEditCuadrilla;
-  zonasList: string[] = ['Valdivia', 'Corral', 'Lanco','Los lagos','Marfil','Mariqina','Paillaco','Panquipulli'];
+  zonasList: string[] = ['Valdivia', 'Corral', 'Lanco','Los lagos','Marfil','Maviqina','Paillaco','Panquipulli'];
   notConfig:any={
     duration:5000
   }
@@ -79,7 +79,7 @@ export class CuadrillaFormComponent implements OnInit {
           this.dialogRef.close();
         },
         err=>{
-          this.notificacion.open("Error inesperado, intente de nuevo","Ok",this.notConfig);
+          this.notificacion.open(err.error.message,"Ok",this.notConfig);
           //console.log(err)
         }
       )
