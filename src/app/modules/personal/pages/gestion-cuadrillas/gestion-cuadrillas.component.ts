@@ -13,20 +13,22 @@ import { CuadrillaService } from '../../services/cuadrilla.service';
   styleUrls: ['./gestion-cuadrillas.component.css']
 })
 export class GestionCuadrillasComponent implements OnInit {
-
+  /*Paginación */
   page:number=0;
   size:number=10;
   length:number;
   pageEvent: PageEvent;
 
-
+  /*Variables de tabla */
   cuadrillas:Cuadrilla[]=[];
   columnasTabla: string[] = ['nombre', 'miembros', 'zonas','opciones'];
-  notConfig:any={duration:5000};
   dataSource:any[];
   cuadrilla:Cuadrilla;
   datosForm:any;
 
+  notConfig:any={duration:5000};//Configuracion Snackbar
+
+  /*Varibales manejo de overlay */
   isOpen = false;
   triggerOrigin:any;//Referencia a usada para mostrar overlay de tipos de daño
   tdanosRowelement:string[];
@@ -40,20 +42,23 @@ export class GestionCuadrillasComponent implements OnInit {
     this.llenarTabla();
   }
 
+  /*Evento que se activa al dar click en los elementos 
+  de la columna Tipo de daño para activar el ng-template 
+  para mostrar un overlay*/
   toggle(trigger:any,rowEl:string[]){
     this.triggerOrigin=trigger;
     this.tdanosRowelement=rowEl;
     this.isOpen=!this.isOpen;
-    console.log("Hola: "+this.tdanosRowelement)
   }
   
+  /*Evento que se activa al interactuar con el paginador */
   eventPage(event?:PageEvent){
     this.page=event.pageIndex;
     this.size=event.pageSize;
     this.llenarTabla();
     return event;
   }
-
+/*Cargar datos en tabla */
   llenarTabla():void{
     this.cuadrillaService.listaCuadrilla(this.page,this.size).subscribe(
       data=>{
@@ -64,10 +69,11 @@ export class GestionCuadrillasComponent implements OnInit {
     )
   }
 
+/*Borrar cuadrilla seleccionada */
   borrarTecnico(nombre:string):void{
     const dialogRef = this.dialog.open(MensajeConfirmacionComponent, {
       width: '350px',
-      data:"Esta seguro que desea eliminar la cuadrilla seleccionada?",
+      data:"Está seguro que desea eliminar la cuadrilla seleccionada?",
       disableClose:true
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -83,6 +89,7 @@ export class GestionCuadrillasComponent implements OnInit {
       });
   }
 
+  /*Abrir dialog para agregar, o actualizar una cuadrilla */
   openDialog(opcion:number,dCuadrilla?:Cuadrilla): void{
     const dialogConfig = new MatDialogConfig();
 

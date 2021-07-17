@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AgendaEventos } from '../model/agendaEventos';
 
 
@@ -9,7 +10,8 @@ import { AgendaEventos } from '../model/agendaEventos';
 })
 export class AgendaService {
   
-  URL='http://localhost:8080/api/agenda'
+  //URL='http://localhost:8080/api/agenda';
+  URL=`${environment.apiUrl}/api/agenda`;
   constructor(private httpClient: HttpClient) { }
 
   public listaAgenda(page:number,size:number):Observable<any[]>{

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AddEditCuadrilla } from '../model/add-edit-cuadrilla';
 import { Cuadrilla } from '../model/cuadrilla';
 
@@ -8,7 +9,8 @@ import { Cuadrilla } from '../model/cuadrilla';
   providedIn: 'root'
 })
 export class CuadrillaService {
-  URL='http://localhost:8080/api/cuadrilla/';
+  //URL='http://localhost:8080/api/cuadrilla/';
+  URL=`${environment.apiUrl}/api/cuadrilla/`;
   constructor(private httpClient:HttpClient) { }
 
   public listaCuadrilla(page:number,size:number):Observable<Cuadrilla[]>{

@@ -12,6 +12,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import {FullCalendarComponent } from '@fullcalendar/angular';
 import { MatDialog } from '@angular/material/dialog';
 import { DetallesEventoComponent } from '../../components/detalles-evento/detalles-evento.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -43,9 +44,11 @@ export class VerAgendaComponent implements OnInit {
 
   progressBar:boolean=false;
   
+  notConfig:any={duration:5000};
 
   constructor(private agendaService:AgendaService,
-              public dialog:MatDialog) { }
+              public dialog:MatDialog,
+              private notificacion:MatSnackBar) { }
 
   ngOnInit(): void {
     this.cargarTecnicos();//Obtener lista de técnicos
@@ -167,12 +170,15 @@ export class VerAgendaComponent implements OnInit {
       data=>{
         if(data.message=1){
           this.progressBar=false;
+          this.obtenerAgendaTecnico();
+          this.notificacion.open("Agendamiento finalizado","Ok",this.notConfig);
         }
-        console.log("resp: "+data.message);
+        //console.log("resp: "+data.message);
       },
       err=>{
         this.progressBar=false;
-        console.log(err.error.message);
+        this.notificacion.open("Error de agendamiento.","Ok",this.notConfig);
+        //console.log(err.error.message);
         //alert("err: "+err.g);
       }
     );

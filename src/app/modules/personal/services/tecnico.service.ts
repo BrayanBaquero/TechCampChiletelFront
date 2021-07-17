@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Tecnico } from '../model/tecnico';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { Tecnico } from '../model/tecnico';
 })
 export class TecnicoService {
 
-  URL='http://localhost:8080/api/tecnico/';
+  //URL='http://localhost:8080/api/tecnico/';
+  URL=`${environment.apiUrl}/api/tecnico/`;
   constructor(private httpcClient:HttpClient) { }
 
   public listaTecnicos(page:number, size:number):Observable<Tecnico[]>{

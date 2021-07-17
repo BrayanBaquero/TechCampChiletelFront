@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { TipoCliente } from '../model/tipo-cliente';
 import { TipoDaño } from '../model/tipo-daño';
 
@@ -11,7 +12,8 @@ import { TipoDaño } from '../model/tipo-daño';
 })
 export class ConfiguracionService {
 
-  URL='http://localhost:8080/api/configuracion'
+  //URL='http://localhost:8080/api/configuracion';
+  URL=`${environment.apiUrl}/api/configuracion`;
   constructor(private httpCient: HttpClient) { }
 
   public listaTiposDaño():Observable<TipoDaño[]>{

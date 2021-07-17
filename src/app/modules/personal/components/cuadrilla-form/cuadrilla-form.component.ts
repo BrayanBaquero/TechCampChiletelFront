@@ -13,6 +13,7 @@ import { CuadrillaService } from '../../services/cuadrilla.service';
   styleUrls: ['./cuadrilla-form.component.css']
 })
 export class CuadrillaFormComponent implements OnInit {
+  patronNombre=/^([A-Za-z])+$/;
 
   cuadrilla:AddEditCuadrilla;
   zonasList: string[] = ['Valdivia', 'Corral', 'Lanco','Los lagos','Marfil','Mariqina','Paillaco','Panquipulli'];
@@ -21,7 +22,7 @@ export class CuadrillaFormComponent implements OnInit {
   }
   CuadrillaForm=this.fb.group(
     {
-      nombre:     [null,[Validators.required,Validators.maxLength(10)]],
+      nombre:     [null,[Validators.required,Validators.maxLength(20),Validators.minLength(3),Validators.pattern(this.patronNombre)]],
       zona:      [[],Validators.required],
     }
   );
@@ -39,7 +40,7 @@ export class CuadrillaFormComponent implements OnInit {
       this.CuadrillaForm.controls['zona'].setValue(this.cuadrilla.zona);
     }
   }
-
+ /*Cerrar dialog */
   cerrar(): void {
     this.dialogRef.close();
   }
@@ -56,6 +57,7 @@ export class CuadrillaFormComponent implements OnInit {
       }
     }
 
+    /*Agregar cuadrilla*/
     agregarCuadrilla():void{
       this.cuadrillaService.agregarCuadrilla(this.cuadrilla).subscribe(
         msg=>{
@@ -68,7 +70,7 @@ export class CuadrillaFormComponent implements OnInit {
         }
       )
     }
-
+    /*Actualizar cuadrilla*/
     actualizarCuadrilla():void{
       this.cuadrillaService.actualizarCuadrilla(this.cuadrilla,this.cuadrilla.nombre).subscribe(
         msg=>{
@@ -81,7 +83,7 @@ export class CuadrillaFormComponent implements OnInit {
         }
       )
     }
-
+    /*Manejo de errores*/
     mssgError(nombreControl:string):string{
       let error='';
       const control=this.CuadrillaForm.get(nombreControl);
@@ -89,6 +91,16 @@ export class CuadrillaFormComponent implements OnInit {
         if(control.getError('required')){
           error="El dato es requerido";
         }
+        if(control.getError('pattern')){
+          error="Nombre invalido.";
+        }
+        if(control.getError('minlength')){
+          error=`Longitud debe ser mayor a ${control.getError('minlength').requiredLength}`;
+        }
+        if(control.getError('maxlength')){
+          error=`Longitud debe ser menor a ${control.getError('maxlength').requiredLength}`;
+        }
+        
       }
       return error;
     }

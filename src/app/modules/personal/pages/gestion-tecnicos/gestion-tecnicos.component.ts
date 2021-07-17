@@ -13,21 +13,21 @@ import { TecnicoService } from '../../services/tecnico.service';
   styleUrls: ['./gestion-tecnicos.component.css']
 })
 export class GestionTecnicosComponent implements OnInit {
+  /*Variables de paginador */
   page:number=0;
   size:number=10;
   length:number;
   pageEvent: PageEvent;
 
   
-
+/*Variable de tabla*/
   tecnicos:Tecnico[]=[];
   displayedColumns: string[] = ['nombre', 'numeroIden', 'tdano','cuadrilla','opciones'];
   tecnico:Tecnico;
   datosForm:any;
-  notConfig:any={
-    duration:5000
-  }
+  notConfig:any={duration:5000 }//Configuracion de snackBar
   
+  /*Overlay tipos de daño */
   isOpen = false;
   triggerOrigin:any;//Referencia a usada para mostrar overlay de tipos de daño
   tdanosRowelement:string[];
@@ -47,7 +47,7 @@ export class GestionTecnicosComponent implements OnInit {
     this.tdanosRowelement=rowEl;
     this.isOpen=!this.isOpen;
   }
-
+ /*Evento que se activa al interactuar con el paginador */
   eventPage(event?:PageEvent){
     this.page=event.pageIndex;
     this.size=event.pageSize;
@@ -55,7 +55,7 @@ export class GestionTecnicosComponent implements OnInit {
     return event;
   }
 
-  //Obtener los datos de los tecnicos
+  //Obtener los datos de los técnicos
   llenarTabla():void{
     this.tecnicoService.listaTecnicos(this.page,this.size).subscribe(
       data=>{
@@ -68,11 +68,11 @@ export class GestionTecnicosComponent implements OnInit {
     );
   }
 
-
+/*Borrar técnico seleccionado */
   borrarTecnico(identificacion:number):void{
     const dialogRef = this.dialog.open(MensajeConfirmacionComponent, {
       width: '400px',
-      data:"Esta seguro que desea eliminar al técnico seleccionado?",
+      data:"Está seguro que desea eliminar al técnico seleccionado?",
       disableClose:true
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -82,7 +82,10 @@ export class GestionTecnicosComponent implements OnInit {
             this.notificacion.open(msg.message,"",this.notConfig);
             this.llenarTabla();
           },
-          err=>{ console.log(err);}
+          err=>{
+             //console.log(err);
+             this.notificacion.open("Erros inesperado, intentelo de nuevo.","Ok",this.notConfig);
+            }
         );
       }
       
