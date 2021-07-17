@@ -7,6 +7,7 @@ import { TecnicoService } from '../../services/tecnico.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CuadrillaService } from '../../services/cuadrilla.service';
+import { RxwebValidators as Rxweb } from "@rxweb/reactive-form-validators";
 
 @Component({
   selector: 'app-tecnico-form',
@@ -17,19 +18,24 @@ export class TecnicoFormComponent implements OnInit{
   tecnico:Tecnico;
   danosList: string[] = ['total', 'parcial', 'esporadica'];
   nombresCuadrillas:string[];
-  notConfig:any={
-    duration:5000
-  }
+
+  notConfig:any={ duration:5000}//Configuracion de snackbar
+
+  /*Expreciones regulares para validación de campos */
+  patronNumeros=/^[1-9]\d{6,18}$/;
+  patronLetras=/^[a-z ,.'-]+$/i;
+  patronNumeroTelefonico=/^(\(\+?\d{2,3}\)[\*|\s|\-|\.]?(([\d][\*|\s|\-|\.]?){10})(([\d][\s|\-|\.]?){2})?|(\+?[\d][\s|\-|\.]?){10}(([\d][\s|\-|\.]?){2}(([\d][\s|\-|\.]?){2})?)?)$/;
+  
   //Definicion de campos de formulario para CRUD
   TecnicosForm=this.fb.group(
     {
-      nombre:     [null,[Validators.required,Validators.maxLength(10)]],
-      apellido:   [null,Validators.required],
-      numeroIden: [null,[Validators.required,Validators.pattern(/^[1-9]\d{6,10}$/)]],
+      nombre:     [null,[Validators.required,Validators.minLength(3),Validators.maxLength(50),Validators.pattern(this.patronLetras)]],
+      apellido:   [null,[Validators.required,Validators.minLength(3),Validators.maxLength(50),Validators.pattern(this.patronLetras)]],
+      numeroIden: [null,[Validators.required,Validators.pattern(this.patronNumeros)]],
       email:      [null,[Validators.required,Validators.email]],
-      telefono:   [null,Validators.required],
-      direccion:  [null,Validators.required],
-      cuadrilla:  [null,Validators.required],
+      telefono:   [null,[Validators.required,Validators.minLength(3),Validators.maxLength(20),Validators.pattern(this.patronNumeroTelefonico)]],
+      direccion:  [null,[Validators.required,Validators.minLength(3),Validators.maxLength(40)]],
+      cuadrilla:  [null,[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
       tdano :     [[],Validators.required],
     },
   );
@@ -46,7 +52,7 @@ export class TecnicoFormComponent implements OnInit{
 
     ngOnInit(){
       this.cuadrillas();//Obtener la lista de nombres de las cuadrillas
-
+      /*Inicializar formulario */
       if(this.data.tecnico!=null){
         this.tecnico=this.data.tecnico;
         this.TecnicosForm.controls['nombre'].setValue(this.tecnico.nombre);
@@ -66,7 +72,7 @@ export class TecnicoFormComponent implements OnInit{
       }
 
     }
-
+    /*Llamada a la api para obtener las cuadrillas disponibles*/
     cuadrillas():void{
       this.cuadrillaService.listaNombresCuadrillas().subscribe(
         data=>{
@@ -75,7 +81,7 @@ export class TecnicoFormComponent implements OnInit{
         err=>{}
       );
     }
-
+    /*Cerrar dialog formulario */
     cerrar(): void {
       this.dialogRef.close();
     }
@@ -91,7 +97,7 @@ export class TecnicoFormComponent implements OnInit{
         this.actualizarTecnico();
       }
     }
-
+    /*Agregar un nuevo tecnico */
     agregarTecnico():void{
       this.tecnicoService.agregarTecnico(this.tecnico).subscribe(
         msg=>{
@@ -106,6 +112,7 @@ export class TecnicoFormComponent implements OnInit{
         }
       )
     }
+    /*Actualizar tecnico selecionado */
     actualizarTecnico():void{
       this.tecnicoService.actualizarTecnico(this.tecnico,this.tecnico.numeroIden).subscribe(
         msg=>{
@@ -118,6 +125,7 @@ export class TecnicoFormComponent implements OnInit{
       )
     }
 
+    /*Control de mensajes de error */
   mssgError(nombreControl:string):string{
     let error='';
     const control=this.TecnicosForm.get(nombreControl);
@@ -128,8 +136,24 @@ export class TecnicoFormComponent implements OnInit{
       if(control.getError('required')){
         error="El dato es requerido";
       }
+      if(control.getError('minlength')){
+        error=`Longitud debe ser mayor a ${control.getError('minlength').requiredLength}`;
+      }
+      if(control.getError('maxlength')){
+        error=`Longitud debe ser menor a ${control.getError('maxlength').requiredLength}`;
+      }
+
       if(control.getError('pattern')){
-        error="Solo puede ingresar valores numericos";
+        
+        if(control.getError('pattern').requiredPattern==this.patronLetras){
+          error="Solo puede ingresar letras";
+        }
+        if(control.getError('pattern').requiredPattern==this.patronNumeros){
+          error="Solo puede ingresar valores numericos";
+        }
+        if(control.getError('pattern').requiredPattern==this.patronNumeroTelefonico){
+          error="Numero de telefono invalido.";
+        }
       }
     }
     return error;

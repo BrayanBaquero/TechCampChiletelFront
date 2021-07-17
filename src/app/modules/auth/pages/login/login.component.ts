@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/personal']);
     }
 
-    this.titleService.setTitle("Formulario");
+    //this.titleService.setTitle("Formulario");
     if(this.tokenService.getToken()){
       this.isLogged=true;
       this.isLoginFail=false;

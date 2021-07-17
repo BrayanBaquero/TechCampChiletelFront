@@ -10,7 +10,7 @@
                     <!-- Columna nombre -->
                     <ng-container matColumnDef="nombre">
                         <mat-header-cell mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.get('nombre').value}}</mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.get('nombre').value | titlecase}}</mat-cell>
                     </ng-container>
 
                     <!-- Columna prioridad -->

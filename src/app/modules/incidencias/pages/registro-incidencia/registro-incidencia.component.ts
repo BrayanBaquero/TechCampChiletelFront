@@ -14,8 +14,11 @@ export class RegistroIncidenciaComponent implements OnInit {
 
   incidenciaDatos:RegistrarIncidencia;
   tiposIncidencia:string[]=['total','parcial','esporadica'];
+
+  patronNumeros=/^[1-9]\d{6,18}$/;
+  /*Campos formulario */
   IncidenciaForm=this.fb.group({
-    cliente:[null,[Validators.required,RxwebValidators.numeric({acceptValue:NumericValueType.PositiveNumber  ,allowDecimal:false })]],
+    cliente:[null,[Validators.required,Validators.pattern(this.patronNumeros)]],
     tipoDaño:[null,Validators.required],
     descripcion:[null,[Validators.required,Validators.maxLength(150)]]
   });
@@ -27,6 +30,7 @@ export class RegistroIncidenciaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  /*Registrar incidencia */
   enviar():void{
     this.incidenciaDatos=this.IncidenciaForm.getRawValue();
     this.incidenciaService.registrarIncidencia(this.incidenciaDatos).subscribe(
@@ -40,16 +44,16 @@ export class RegistroIncidenciaComponent implements OnInit {
       }
     )
   }
-
+/*Control de errores de formulario */
   mssgError(nombreControl:string):string{
     let error='';
     const control=this.IncidenciaForm.get(nombreControl);
     if(control.touched && control.errors!=null){
       if(control.getError('required')){
-        error="El dato es requerido";
+        error="El dato es requerido.";
       }
       if(control.getError('pattern')){
-        error="Solo puede ingresar valores numericos";
+        error="Solo puede ingresar valores numericos.";
       }
     }
     return error;
